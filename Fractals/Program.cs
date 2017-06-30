@@ -193,7 +193,7 @@ namespace Fractals
 			{
 				for(int i = 0; i < columnNum; i++)
 				{
-					blocks[granularity * granularity + i] = new int[] { i * blockWidth, granularity * blockHeight, blockWidth, imgHeight - blockHeight * granularity };
+					blocks[granularity * granularity + i] = new int[] { i * blockWidth, granularity * blockHeight, blockWidth, imgHeight % granularity };
 				}
 			}
 
@@ -202,7 +202,7 @@ namespace Fractals
 
 				for(int i = 0; i < granularity; i++)
 				{
-					blocks[granularity * granularity + columnNum + i] = new int[] { granularity * blockWidth, i * blockHeight, imgWidth - granularity * blockWidth, blockHeight };
+					blocks[granularity * granularity + columnNum + i] = new int[] { granularity * blockWidth, i * blockHeight, imgWidth % granularity, blockHeight };
 				}
 
 			}

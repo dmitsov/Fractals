@@ -168,7 +168,7 @@ namespace Fractals
 
 		static void CalcBlocks()
 		{
-			int granularity = threadCount;
+			int granularity = 4 * threadCount;
 			int blockWidth = imgWidth / granularity;
 			int blockHeight = imgHeight / granularity;
 
@@ -289,15 +289,8 @@ namespace Fractals
 
 					lock(img)
 					{
-						try
-						{
-							img.SetPixel(x, y, pixelColor);
-						}
-						catch(Exception e)
-						{
-							Console.WriteLine("{0} {1} {2} {3}", startX, startY, width, height);
-							return;
-						}
+						img.SetPixel(x, y, pixelColor);
+						
 					}
 				}
 

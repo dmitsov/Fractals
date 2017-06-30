@@ -168,7 +168,7 @@ namespace Fractals
 
 		static void CalcBlocks()
 		{
-			int granularity = 4 * threadCount;
+			int granularity = threadCount;
 			int blockWidth = imgWidth / granularity;
 			int blockHeight = imgHeight / granularity;
 

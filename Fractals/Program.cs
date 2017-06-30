@@ -29,6 +29,7 @@ namespace Fractals
 
 		static int blockCount;
 
+
 		static void Main(string[] args)
 		{
 			
@@ -71,11 +72,15 @@ namespace Fractals
 				blockIndex = 0;
 					
 				CalcBlocks();
-					
+				Thread[] threads = new Thread[threadCount - 1];
 				for(int i = 0; i < threadCount - 1; i++)
 				{
 					doneEvents[i] = new ManualResetEvent(false);
-					ThreadPool.QueueUserWorkItem((x) => { drawFractalBlock(img, (int)x); },i);
+					threads[i] = new Thread((x) =>
+					{
+						drawFractalBlock(img, (int)x);
+					});
+					threads[i].Start(i);
 				}
 
 				while(blockIndex < blockCount)
@@ -88,11 +93,17 @@ namespace Fractals
 				}
 
 				WaitHandle.WaitAll(doneEvents);
+				
+				for(int i = 0; i < threads.Length; i++)
+				{
+					threads[i].Join();
+				}
 			}
 
 			TimeSpan executionTime = DateTime.Now - currentTime;
 			float milliseconds = (executionTime.Hours * 3600 + executionTime.Minutes * 60 + executionTime.Seconds) * 1000 + executionTime.Milliseconds;
 
+			
 			Console.WriteLine("Total execution time {0}ms", milliseconds);
 
 			img.Save(fileName, System.Drawing.Imaging.ImageFormat.Png);

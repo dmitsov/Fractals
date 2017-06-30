@@ -281,7 +281,14 @@ namespace Fractals
 
 					lock(img)
 					{
-						img.SetPixel(x, y, pixelColor);
+						try
+						{
+							img.SetPixel(x, y, pixelColor);
+						}
+						catch(Exception e)
+						{
+							Console.WriteLine("{0} {1}", x, y);
+						}
 					}
 				}
 

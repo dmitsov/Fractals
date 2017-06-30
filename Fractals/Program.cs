@@ -191,10 +191,12 @@ namespace Fractals
 
 			if(rowNum > granularity)
 			{
-				for(int i = 0; i < columnNum; i++)
+				for(int i = 0; i < granularity; i++)
 				{
 					blocks[granularity * granularity + i] = new int[] { i * blockWidth, granularity * blockHeight, blockWidth, imgHeight % granularity };
 				}
+
+				blocks[granularity * granularity + granularity] = new int[] { granularity * blockWidth, granularity * blockHeight, imgWidth % granularity, imgHeight % granularity };
 			}
 
 			if(columnNum > granularity)

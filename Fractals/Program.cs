@@ -51,14 +51,20 @@ namespace Fractals
 				{
 					SetThreadNum(args[i + 1]);
 				}
+				else if(args[i] == "-o" || args[i] == "-output")
+				{
+					fileName = args[i + 1];
+				}
 			}
 
 			Bitmap img = new Bitmap(imgWidth, imgHeight);
-			
+
+			Console.WriteLine("Threads used in current run: {0}", threadCount);
 			DateTime currentTime = DateTime.Now;
+			
+
 			if(!isQuiet)
 			{
-				Console.WriteLine("Threads used in current run: {0}", threadCount);
 				Console.WriteLine("Main thread id: {0}", Thread.CurrentThread.ManagedThreadId);
 			}
 
@@ -253,7 +259,7 @@ namespace Fractals
 		{
 			Complex z = c;
 			int i = 0;
-			for(; i < maxIter && z.Magnitude < 100; i++)
+			for(; i < maxIter && z.Magnitude < 50; i++)
 			{
 				z = Complex.Exp(Complex.Cos(Complex.Multiply(z, c)));
 			}

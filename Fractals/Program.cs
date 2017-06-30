@@ -193,7 +193,7 @@ namespace Fractals
 			{
 				for(int i = 0; i < columnNum; i++)
 				{
-					blocks[granularity * granularity + i] = new int[] { i * blockWidth, granularity * blockHeight, blockWidth, imgHeight % (granularity -1) };
+					blocks[granularity * granularity + i] = new int[] { i * blockWidth, granularity * blockHeight, blockWidth, imgHeight % granularity };
 				}
 			}
 
@@ -202,7 +202,7 @@ namespace Fractals
 
 				for(int i = 0; i < granularity; i++)
 				{
-					blocks[granularity * granularity + columnNum + i] = new int[] { granularity * blockWidth, i * blockHeight, imgWidth % (granularity - 1), blockHeight };
+					blocks[granularity * granularity + columnNum + i] = new int[] { granularity * blockWidth, i * blockHeight, imgWidth % granularity, blockHeight };
 				}
 
 			}
@@ -287,7 +287,8 @@ namespace Fractals
 						}
 						catch(Exception e)
 						{
-							Console.WriteLine("{0} {1}", x, y);
+							Console.WriteLine("{0} {1} {2} {3}", startX, startY, width, height);
+							return;
 						}
 					}
 				}
